@@ -1,0 +1,20 @@
+{
+    "name": "go-powercontrol",
+    "outputfilename": "go-powercontrol",
+    "frontend:install": "",
+    "frontend:build": "",
+    "frontend:dev:watcher": "",
+    "frontend:dev:serverUrl": "auto",
+    "author": {
+        "name": "Levon Bragg",
+        "email": ""
+    },
+    "info": {
+        "companyName": "",
+        "productName": "Go PowerControl",
+        "productVersion": "1.0.0",
+        "copyright": "Copyright © 2025",
+        "comments": "Cross-platform MQTT power control application"
+    },
+    "nsisType": "multiple"
+}

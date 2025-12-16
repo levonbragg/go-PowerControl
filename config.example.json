@@ -1,0 +1,7 @@
+{
+    "username": "mqtt_user",
+    "passwordHash": "<your-encrypted-password>",
+    "mqttServer": "192.168.1.100",
+    "serverPort": 1883,
+    "subscribeString": "power/#"
+}
