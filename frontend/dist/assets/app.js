@@ -4,6 +4,7 @@ const app = {
     messages: [],
     selectedDevice: null,
     connected: false,
+    currentSearchText: '',
 
     async init() {
         console.log('Initializing Go PowerControl...');
@@ -44,7 +45,12 @@ const app = {
 
     async loadDevices() {
         try {
-            this.devices = await window.go.app.App.GetDevices();
+            // Reapply search filter if one is active
+            if (this.currentSearchText) {
+                this.devices = await window.go.app.App.SearchDevices(this.currentSearchText);
+            } else {
+                this.devices = await window.go.app.App.GetDevices();
+            }
             this.renderDevices();
         } catch (error) {
             console.error('Failed to load devices:', error);
@@ -129,6 +135,9 @@ const app = {
 
     async handleSearch(searchText) {
         try {
+            // Store current search text to preserve filter
+            this.currentSearchText = searchText;
+
             if (searchText) {
                 this.devices = await window.go.app.App.SearchDevices(searchText);
             } else {
