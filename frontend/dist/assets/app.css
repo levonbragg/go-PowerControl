@@ -1,19 +1,19 @@
-/* Modern Purple Theme */
+/* Modern Blue & Orange Theme */
 :root {
-    --bg-primary: #1a1a1f;
-    --bg-secondary: #25252e;
-    --bg-tertiary: #2f2f3a;
-    --primary: #8b5cf6;
-    --primary-hover: #7c3aed;
-    --primary-light: #a78bfa;
-    --accent: #ec4899;
-    --text-primary: #f3f4f6;
-    --text-secondary: #9ca3af;
-    --border: #3f3f4a;
+    --bg-primary: #000000;
+    --bg-secondary: #14213d;
+    --bg-tertiary: #1a2e52;
+    --primary: #fca311;
+    --primary-hover: #e59400;
+    --primary-light: #ffb834;
+    --accent: #fca311;
+    --text-primary: #ffffff;
+    --text-secondary: #e5e5e5;
+    --border: #2a3f5f;
     --success: #10b981;
     --error: #ef4444;
-    --warning: #f59e0b;
-    --shadow: rgba(0, 0, 0, 0.3);
+    --warning: #fca311;
+    --shadow: rgba(0, 0, 0, 0.5);
 }
 
 * {
@@ -165,7 +165,7 @@ body {
 
 .grid-table tbody tr.selected {
     background: var(--primary);
-    color: white;
+    color: black;
 }
 
 .status-on {
@@ -218,7 +218,7 @@ select:focus {
 button {
     padding: 0.5rem 1.5rem;
     background: var(--primary);
-    color: white;
+    color: black;
     border: none;
     border-radius: 0.375rem;
     font-size: 1rem;
