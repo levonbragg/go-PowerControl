@@ -20,9 +20,65 @@ A modern, cross-platform MQTT power control application built with Go and Wails 
 - **Go 1.21+** - [Download](https://go.dev/dl/)
 - **Node.js 16+** - [Download](https://nodejs.org/)
 - **Wails CLI** - Install with: `go install github.com/wailsapp/wails/v2/cmd/wails@latest`
-- **C Compiler** (for CGO):
-  - Windows: [MinGW-w64](https://www.mingw-w64.org/) or [TDM-GCC](https://jmeubank.github.io/tdm-gcc/)
-  - Linux: GCC (usually pre-installed)
+- **System Dependencies**:
+  - **Windows**: [MinGW-w64](https://www.mingw-w64.org/) or [TDM-GCC](https://jmeubank.github.io/tdm-gcc/)
+  - **Linux**: See [Linux Setup](#linux-setup) below for required packages
+
+### Linux Setup
+
+On Linux, Wails requires GTK3 and WebKit2GTK for building desktop applications. Follow these steps:
+
+#### Quick Setup (Recommended)
+
+Run the automated setup script:
+```bash
+./setup-linux.sh
+```
+
+This script will check and install all required dependencies, configure your PATH, and verify your setup.
+
+#### Manual Setup
+
+1. **Install system dependencies**:
+   ```bash
+   # Debian/Ubuntu/Linux Mint
+   sudo apt install build-essential pkg-config libgtk-3-dev
+   
+   # Install WebKit2GTK (try 4.0 first, fallback to 4.1)
+   sudo apt install libwebkit2gtk-4.0-dev || sudo apt install libwebkit2gtk-4.1-dev
+   ```
+   
+   > [!NOTE]
+   > Newer distributions (Debian 13+, Ubuntu 24.04+) only have `libwebkit2gtk-4.1-dev`. If you install 4.1, you'll need to create a compatibility symlink:
+   > ```bash
+   > sudo ln -sf webkit2gtk-4.1.pc /usr/lib/x86_64-linux-gnu/pkgconfig/webkit2gtk-4.0.pc
+   > ```
+
+2. **Install Wails CLI**:
+   ```bash
+   go install github.com/wailsapp/wails/v2/cmd/wails@latest
+   ```
+
+3. **Add Go binaries to your PATH**:
+   
+   The `wails` command will be installed to `$HOME/go/bin` (or `$GOPATH/bin`), which needs to be in your PATH.
+   
+   Add this line to your `~/.bashrc`, `~/.zshrc`, or equivalent shell config:
+   ```bash
+   export PATH="$HOME/go/bin:$PATH"
+   ```
+   
+   Then reload your shell config:
+   ```bash
+   source ~/.bashrc  # or ~/.zshrc
+   ```
+
+4. **Verify installation**:
+   ```bash
+   wails doctor
+   ```
+   
+   This should show all dependencies as "Installed" or "Available" (optional dependencies can be "Available").
 
 ### Installation from Source
 
@@ -184,10 +240,38 @@ Payload: 0
 - Check disk space
 
 ### Build Issues
-- Ensure all prerequisites are installed
+
+#### General
 - Run `go mod tidy` to sync dependencies
 - Run `npm install` in `frontend` directory
-- Verify C compiler is in PATH
+
+#### Linux-specific
+- **"wails: command not found"**: 
+  - The Wails CLI is installed but not in your PATH
+  - Add `export PATH="$HOME/go/bin:$PATH"` to your shell config file (`~/.bashrc` or `~/.zshrc`)
+  - Reload your shell: `source ~/.bashrc`
+  - Verify: `which wails` should show the path to wails
+  
+- **Missing dependencies during build**:
+  - Run `wails doctor` to check what's missing
+  - Install required packages: `sudo apt install build-essential pkg-config libgtk-3-dev libwebkit2gtk-4.0-dev`
+  
+- **"Package gtk+-3.0 was not found"**: Install GTK3 development headers:
+  ```bash
+  sudo apt install libgtk-3-dev
+  ```
+
+- **"Package webkit2gtk-4.0 was not found"**: 
+  - On newer distributions, only `libwebkit2gtk-4.1-dev` is available
+  - Install it: `sudo apt install libwebkit2gtk-4.1-dev`
+  - Create a compatibility symlink:
+    ```bash
+    sudo ln -sf webkit2gtk-4.1.pc /usr/lib/x86_64-linux-gnu/pkgconfig/webkit2gtk-4.0.pc
+    ```
+
+#### Windows-specific
+- Ensure MinGW-w64 or TDM-GCC is installed and in PATH
+- Verify C compiler: `gcc --version`
 
 ## 📊 Performance
 
