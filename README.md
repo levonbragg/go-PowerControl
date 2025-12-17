@@ -1,6 +1,7 @@
 # Go PowerControl
 
-A modern, cross-platform MQTT power control application built with Go and Wails v2. This application manages power outlets on MQTT-connected power strips, providing real-time monitoring and control capabilities.
+A modern, cross-platform MQTT power control application built with Go and Wails v2. This application manages power outlets on MQTT-connected power strips, providing real-time monitoring and control capabilities. 
+Specifically written with the Digital Loggers Inc, Web Power switches in mind. https://dlidirect.com/products/new-pro-switch
 
 ## ✨ Features
 
