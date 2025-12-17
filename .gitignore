@@ -5,6 +5,12 @@
 *.so
 *.dylib
 
+# .env files
+.env
+
+# NSIS installer
+.nsi
+
 # Test binary, built with `go test -c`
 *.test
 
