@@ -7,7 +7,9 @@
 
 # .env files
 .env
-.env.example
+
+# NSIS installer
+.nsi
 
 # Test binary, built with `go test -c`
 *.test
